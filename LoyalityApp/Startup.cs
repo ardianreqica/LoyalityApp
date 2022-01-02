@@ -54,12 +54,12 @@ namespace LoyalityApp
                         new Transaction
                         {
                             Ammount=250,
-                            Date = new DateTime(2021,12,27)
+                            Date = new DateTime(2021,12,28)
                         },
                         new Transaction
                         {
                             Ammount=150,
-                            Date = new DateTime(2021,12,24)
+                            Date = new DateTime(2021,12,29)
                         }
                     },
                     LoyalityPointsTransactions = new List<LoyalityPointsTransaction>()
@@ -209,7 +209,7 @@ namespace LoyalityApp
                 var customer4 = new Customer
                 {
                     Id = new Guid(),
-                    Name = "Ardian Recica",
+                    Name = "Ardian Recica4",
                     CustomerLoyalityPoints = new CustomerLoyalityPoints()
                     {
                         LoyalityPoint = 5000
@@ -241,7 +241,7 @@ namespace LoyalityApp
                         }
                     }
                 };
-                context.Customers.Add(customer1);
+                context.Customers.Add(customer4);
 
                 var transactionRange = new List<TransactionPointRange>()
                 {

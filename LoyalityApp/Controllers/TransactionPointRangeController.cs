@@ -36,23 +36,7 @@ namespace LoyalityApp.Controllers
                 .FirstOrDefault();
         }
         
-        [HttpGet]
-        [Route("acquire-point-logic")]
-        public int Get(int points)
-        {
-            decimal result = 0;
-            var pointRange = _context.TransactionPointRanges;
 
-            foreach (var range in pointRange)
-            {
-                if (points > range.Max)
-                    result += (range.Max - range.Min) * range.PointValue;
-                else
-                    if (range.Min < points && points < range.Max)
-                    result += (points - range.Min) * range.PointValue;
-                }
-            return (int)result;
-        }
 
     }
 }

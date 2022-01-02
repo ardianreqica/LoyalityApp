@@ -9,10 +9,6 @@ using System.Threading.Tasks;
 
 namespace LoyalityApp.BackgroundService
 {
-    //public class ValidateLoyalityPoints
-    //{
-    //}
-
     public class TimedHostedService : IHostedService, IDisposable
     {
         private int executionCount = 0;
@@ -82,7 +78,6 @@ namespace LoyalityApp.BackgroundService
                     customer.CustomerLoyalityPoints.LoyalityPoint += (int)transactionAmmount * 100;
                 }
 
-
                 #region A user will lose all the points if no transaction was made in the last 5 weeks.
 
                 DateTime lastFiveWeekStart = startingDate.AddDays(-28);
@@ -95,29 +90,12 @@ namespace LoyalityApp.BackgroundService
                     customer.CustomerLoyalityPoints.LoyalityPoint = 0;
 
                 #endregion
-
             }
-
-
-
-
 
             var count = Interlocked.Increment(ref executionCount);
 
-
-
             _logger.LogInformation(
                 "Timed Hosted Service is working. Count: {Count}", count);
-
-
-            //           1) Check if the day is sunday and sum all amounts of transactions in that week
-            //if the sum > 500 than loyaltyPoints += sum
-
-
-            //foreach(var customer in )
-
-
-
         }
 
         public Task StopAsync(CancellationToken stoppingToken)

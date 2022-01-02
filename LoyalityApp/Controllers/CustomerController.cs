@@ -40,8 +40,8 @@ namespace LoyalityApp.Controllers
         }
 
         [HttpGet]
-        [Route("{id}/loyality-points")]
-        public double GetLoyalityPoints(Guid id)
+        [Route("{id}/loyality-points-to-euro")]
+        public double GetLoyalityPointsToEuro(Guid id)
         {
             var loyalityPointInEuro = (_context.Customers.Where(t => t.Id == id)
                .Include(t => t.CustomerLoyalityPoints)
