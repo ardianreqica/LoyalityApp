@@ -170,7 +170,7 @@ namespace LoyalityApp
                         },
                         new Transaction
                         {
-                            Ammount=8,
+                            Ammount=8000,
                             Date = new DateTime(2021,12,30)
                         },
                         new Transaction

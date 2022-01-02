@@ -63,7 +63,7 @@ namespace LoyalityApp.Controllers
 
             if (distinctTransactions.Count() == 7 & transactionAmmount > 500)
             {
-                customer.CustomerLoyalityPoints.LoyalityPoint += AacquirePointLogic((int)(transactionAmmount * 100));
+                customer.CustomerLoyalityPoints.LoyalityPoint += AacquirePointLogic((int)transactionAmmount);
             }
             else
             {
