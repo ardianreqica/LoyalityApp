@@ -11,6 +11,7 @@ namespace LoyalityApp.Models
         public Guid Id { get; set; }
         public Guid CusomerId { get; set; }
         public int Ammount { get; set; }
+        public DateTime Date { get; set; }
 
         [ForeignKey("CustomerId")]
         public Customer Customer { get; set; }

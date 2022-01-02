@@ -10,7 +10,7 @@ namespace LoyalityApp.Models
     public class CustomerLoyalityPoints
     {
         [Key]
-        [ForeignKey("CustomerId")]
+        public Guid Id { get; set; }
         public Guid CustomerId { get; set; }
         public int LoyalityPoint { get; set; }
 

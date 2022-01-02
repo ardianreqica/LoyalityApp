@@ -25,12 +25,8 @@ namespace LoyalityApp.Controllers
         [HttpGet]
         public IEnumerable<Customer> Get()
         {
-            return _context.Customers
-                .Include(t => t.LoyalityPointsTransactions)
-                .Include(t => t.Transactions)
-                .ToList();
+            return _context.Customers;
         }
-
 
         [HttpGet]
         [Route("{id}")]
@@ -39,86 +35,19 @@ namespace LoyalityApp.Controllers
             return _context.Customers.Where(t => t.Id == id)
                .Include(t => t.LoyalityPointsTransactions)
                .Include(t => t.Transactions)
+               .Include(t=>t.CustomerLoyalityPoints)
                .FirstOrDefault();
         }
 
+        [HttpGet]
+        [Route("{id}/loyality-points")]
+        public double GetLoyalityPoints(Guid id)
+        {
+            var loyalityPointInEuro = (_context.Customers.Where(t => t.Id == id)
+               .Include(t => t.CustomerLoyalityPoints)
+               .FirstOrDefault().CustomerLoyalityPoints.LoyalityPoint) / 100;
 
-        // GET: CustomerController
-        //public int Index()
-        //{
-        //    return 1;
-        //}
-
-        //// GET: CustomerController/Details/5
-        //public ActionResult Details(int id)
-        //{
-        //    return View();
-        //}
-
-        //// GET: CustomerController/Create
-        //public ActionResult Create()
-        //{
-        //    return View();
-        //}
-
-        //// POST: CustomerController/Create
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Create(IFormCollection collection)
-        //{
-        //    try
-        //    {
-
-        //        //db.Students.Add(student);
-        //        //db.SaveChanges();
-        //        return RedirectToAction("Index");
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: CustomerController/Edit/5
-        //public ActionResult Edit(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: CustomerController/Edit/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Edit(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();
-        //    }
-        //}
-
-        //// GET: CustomerController/Delete/5
-        //public ActionResult Delete(int id)
-        //{
-        //    return View();
-        //}
-
-        //// POST: CustomerController/Delete/5
-        //[HttpPost]
-        //[ValidateAntiForgeryToken]
-        //public ActionResult Delete(int id, IFormCollection collection)
-        //{
-        //    try
-        //    {
-        //        return RedirectToAction(nameof(Index));
-        //    }
-        //    catch
-        //    {
-        //        return View();        //    }
-        //}
+            return Math.Round((double)loyalityPointInEuro, 2); 
+        }
     }
 }

@@ -40,6 +40,7 @@ namespace LoyalityApp
             {
                 #region Customers
 
+                // The customer has spent at least 500 euro that week
                 var customer1 = new Customer
                 {
                     Id = new Guid(),
@@ -52,22 +53,36 @@ namespace LoyalityApp
                     {
                         new Transaction
                         {
-                            Ammount=5000,
+                            Ammount=250,
                             Date = new DateTime(2021,12,27)
                         },
                         new Transaction
                         {
-                            Ammount=5000,
+                            Ammount=150,
                             Date = new DateTime(2021,12,24)
+                        }
+                    },
+                    LoyalityPointsTransactions = new List<LoyalityPointsTransaction>()
+                    {
+                        new LoyalityPointsTransaction()
+                        {
+                            Ammount=500,
+                            Date = new DateTime(2021,11,27)
+                        },
+                        new LoyalityPointsTransaction()
+                        {
+                            Ammount=300,
+                            Date = new DateTime(2021,12,23)
                         }
                     }
                 };
                 context.Customers.Add(customer1);
 
+                // At least one transaction exists for that customer on every day of the week
                 var customer2 = new Customer
                 {
                     Id = new Guid(),
-                    Name = "Ardian Recica",
+                    Name = "Ardian Recica2",
                     CustomerLoyalityPoints = new CustomerLoyalityPoints()
                     {
                         LoyalityPoint = 5000
@@ -76,19 +91,122 @@ namespace LoyalityApp
                     {
                         new Transaction
                         {
-                            Ammount=5000,
+                            Ammount=5,
                             Date = new DateTime(2021,12,27)
                         },
                         new Transaction
                         {
-                            Ammount=5000,
-                            Date = new DateTime(2021,12,24)
+                            Ammount=6,
+                            Date = new DateTime(2021,12,28)
+                        },
+                        new Transaction
+                        {
+                            Ammount=7,
+                            Date = new DateTime(2021,12,29)
+                        },
+                        new Transaction
+                        {
+                            Ammount=8,
+                            Date = new DateTime(2021,12,30)
+                        },
+                        new Transaction
+                        {
+                            Ammount=9,
+                            Date = new DateTime(2021,12,31)
+                        },
+                        new Transaction
+                        {
+                            Ammount=6,
+                            Date = new DateTime(2022,1,1)
+                        },
+                        new Transaction
+                        {
+                            Ammount=3,
+                            Date = new DateTime(2022,1,2)
+                        }
+                    },
+                    LoyalityPointsTransactions = new List<LoyalityPointsTransaction>()
+                    {
+                        new LoyalityPointsTransaction()
+                        {
+                            Ammount=500,
+                            Date = new DateTime(2021,12,27)
+                        },
+                        new LoyalityPointsTransaction()
+                        {
+                            Ammount=300,
+                            Date = new DateTime(2021,12,23)
                         }
                     }
                 };
                 context.Customers.Add(customer2);
 
+                // The customer has spent at least 500 euro that week
+                // At least one transaction exists for that customer on every day of the week
                 var customer3 = new Customer
+                {
+                    Id = new Guid(),
+                    Name = "Ardian Recica3",
+                    CustomerLoyalityPoints = new CustomerLoyalityPoints()
+                    {
+                        LoyalityPoint = 5000
+                    },
+                    Transactions = new List<Transaction>()
+                    {
+                        new Transaction
+                        {
+                            Ammount=5,
+                            Date = new DateTime(2021,12,27)
+                        },
+                        new Transaction
+                        {
+                            Ammount=6,
+                            Date = new DateTime(2021,12,28)
+                        },
+                        new Transaction
+                        {
+                            Ammount=700,
+                            Date = new DateTime(2021,12,29)
+                        },
+                        new Transaction
+                        {
+                            Ammount=8,
+                            Date = new DateTime(2021,12,30)
+                        },
+                        new Transaction
+                        {
+                            Ammount=90,
+                            Date = new DateTime(2021,12,31)
+                        },
+                        new Transaction
+                        {
+                            Ammount=6,
+                            Date = new DateTime(2022,1,1)
+                        },
+                        new Transaction
+                        {
+                            Ammount=3,
+                            Date = new DateTime(2022,1,2)
+                        }
+                    },
+                    LoyalityPointsTransactions = new List<LoyalityPointsTransaction>()
+                    {
+                        new LoyalityPointsTransaction()
+                        {
+                            Ammount=500,
+                            Date = new DateTime(2021,11,29)
+                        },
+                        new LoyalityPointsTransaction()
+                        {
+                            Ammount=300,
+                            Date = new DateTime(2021,12,23)
+                        }
+                    }
+                };
+                context.Customers.Add(customer3);
+
+                // A user will lose all the points if no transaction was made in the last 5 weeks.
+                var customer4 = new Customer
                 {
                     Id = new Guid(),
                     Name = "Ardian Recica",
@@ -100,18 +218,30 @@ namespace LoyalityApp
                     {
                         new Transaction
                         {
-                            Ammount=5000,
-                            Date = new DateTime(2021,12,27)
+                            Ammount=250,
+                            Date = new DateTime(2021,7,27)
                         },
                         new Transaction
                         {
-                            Ammount=5000,
-                            Date = new DateTime(2021,12,24)
+                            Ammount=150,
+                            Date = new DateTime(2021,8,24)
+                        }
+                    },
+                    LoyalityPointsTransactions = new List<LoyalityPointsTransaction>()
+                    {
+                        new LoyalityPointsTransaction()
+                        {
+                            Ammount=500,
+                            Date = new DateTime(2021,12,27)
+                        },
+                        new LoyalityPointsTransaction()
+                        {
+                            Ammount=300,
+                            Date = new DateTime(2021,12,23)
                         }
                     }
                 };
-                context.Customers.Add(customer3);
-
+                context.Customers.Add(customer1);
 
                 var transactionRange = new List<TransactionPointRange>()
                 {
@@ -123,7 +253,7 @@ namespace LoyalityApp
                     },
                     new TransactionPointRange()
                     {
-                        Min = 5001,
+                        Min = 5000,
                         Max = 7500,
                         PointValue = 2
                     },
@@ -135,15 +265,12 @@ namespace LoyalityApp
                     }
                 };
 
+                context.AddRange(transactionRange);
+
                 #endregion
-
-
-
 
                 context.SaveChanges();
             }
-
-            //services.AddControllers();
 
             services.AddControllersWithViews()
                     .AddNewtonsoftJson(options =>
